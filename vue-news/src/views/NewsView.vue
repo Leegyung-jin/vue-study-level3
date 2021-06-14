@@ -15,17 +15,16 @@ export default {
   },
   // 컴포넌트가 생성되자마자 실행되는 로직
   created() {
-    var vm = this;
-    // axios.get('https://api.hnpwa.com/v0/news/1.json')
+    console.log('호출전',this);
+
     fetchNewsList()
-    .then(function(response) {
-      console.log(response);
-      vm.users = response.data;
+    .then(response => {
+      console.log('호출후',this);
+      this.users = response.data;
     })
     .catch(function(error) {
       console.log(error);
     })
-    // getNewsList();
   }
 }
 </script>
