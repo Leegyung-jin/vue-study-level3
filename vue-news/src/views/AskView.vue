@@ -1,30 +1,39 @@
 <template>
   <div>
-<!--    <div v-for="item in ask" v-bind:key="item.id">{{ item.title }}</div>-->
-<!--    <div v-for="item in askItems" v-bind:key="item.id">{{ item.title }}</div>-->
-    <p  v-for="item in $store.state.ask" v-bind:key="item.id">
-<!--      <a v-bind:href="item.url">-->
+    <ul class="ask-list">
+      <li v-for="item in $store.state.ask" v-bind:key="item.id" class="post">
+        <div class="points">
+          {{ item.points }}
+        </div>
+        <div>
+          <p class="ask-title">
+            <router-link v-bind:to="`item/${item.id}`">
+              {{ item.title }}
+            </router-link>
+          </p>
+          <small class="link-text">
+            {{ item.time_ago }} by
+            <router-link v-bind:to="`user/${item.user}`">
+              {{ item.user }}
+            </router-link>
+          </small>
+        </div>
+      </li>
+    </ul>
+
+<!--    <p v-for="item in $store.state.ask" v-bind:key="item.id">-->
+<!--      <router-link v-bind:to="`item/${item.id}`">-->
 <!--        {{ item.title }}-->
-<!--      </a>-->
-      <router-link v-bind:to="`item/${item.id}`">
-        {{ item.title }}
-      </router-link>
-      <small>{{ item.time_ago }} by {{ item.user }}</small>
-    </p>
+<!--      </router-link>-->
+<!--      <small>{{ item.time_ago }} by {{ item.user }}</small>-->
+<!--    </p>-->
   </div>
 </template>
 
 <script>
-// import { fetchAskList } from "../api/index";
-// import { mapState } from 'vuex';
 import { mapGetters } from 'vuex';
 
 export default {
-  // data() {
-  //   return {
-  //     ask: []
-  //   }
-  // },
   computed: {
     // #3
     ...mapGetters({
@@ -57,5 +66,28 @@ export default {
 </script>
 
 <style scoped>
-
+.ask-list {
+  margin: 0;
+  padding: 0;
+}
+.post {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+.points {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* 가로에서 중앙정렬 */
+  color: #42b883;
+}
+.ask-title {
+  margin: 0;
+}
+.link-text {
+  color: #828282;
+}
 </style>
