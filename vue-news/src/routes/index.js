@@ -18,15 +18,18 @@ export const router = new VueRouter({
         {
             // path: url 주소에 대한 정보
             path: '/news',
+            name: 'news',
             // component: url 주소로 이동했을 때 표시될 컴포넌트
             component: NewsView,
         },
         {
             path: '/ask',
+            name: 'ask',
             component: AskView,
         },
         {
             path: '/jobs',
+            name: 'jobs',
             component: JobsView,
         },
         {
