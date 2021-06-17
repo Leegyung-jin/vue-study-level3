@@ -3,12 +3,13 @@
 <!--    <div v-for="item in ask" v-bind:key="item.id">{{ item.title }}</div>-->
 <!--    <div v-for="item in askItems" v-bind:key="item.id">{{ item.title }}</div>-->
     <p  v-for="item in $store.state.ask" v-bind:key="item.id">
-      <a v-bind:href="item.url">
+<!--      <a v-bind:href="item.url">-->
+<!--        {{ item.title }}-->
+<!--      </a>-->
+      <router-link v-bind:to="`item/${item.id}`">
         {{ item.title }}
-      </a>
-      <small>
-        {{ item.time_ago }} by {{ item.user }}
-      </small>
+      </router-link>
+      <small>{{ item.time_ago }} by {{ item.user }}</small>
     </p>
   </div>
 </template>
