@@ -1,25 +1,5 @@
 <template>
   <div>
-<!--    <ul class="ask-list">-->
-<!--      <li v-for="item in $store.state.ask" v-bind:key="item.id" class="post">-->
-<!--        <div class="points">-->
-<!--          {{ item.points }}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <p class="ask-title">-->
-<!--            <router-link v-bind:to="`item/${item.id}`">-->
-<!--              {{ item.title }}-->
-<!--            </router-link>-->
-<!--          </p>-->
-<!--          <small class="link-text">-->
-<!--            {{ item.time_ago }} by-->
-<!--            <router-link v-bind:to="`user/${item.user}`">-->
-<!--              {{ item.user }}-->
-<!--            </router-link>-->
-<!--          </small>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--    </ul>-->
     <list-item></list-item>
   </div>
 </template>
@@ -27,10 +7,21 @@
 <script>
 // import { mapGetters } from 'vuex';
 import ListItem from "../components/ListItem";
+import bus from "../utils/bus";
 
 export default {
   created() {
-    this.$store.dispatch('FETCH_ASK');
+    bus.$emit('start:spinner');
+    setTimeout(() => {
+      this.$store.dispatch('FETCH_ASK')
+        .then(() => {
+          console.log('fetched');
+          bus.$emit('end:spinner');
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+    }, 3000);
   },
   components: {
     ListItem
