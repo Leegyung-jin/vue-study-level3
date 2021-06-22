@@ -29,15 +29,9 @@
 import ListItem from "../components/ListItem";
 
 export default {
-  // computed: {
-  //   // #3
-  //   ...mapGetters({
-  //     askItems: 'fetchedAsk'
-  //   }),
-  // },
-  // created() {
-  //   this.$store.dispatch('FETCH_ASK');
-  // }
+  created() {
+    this.$store.dispatch('FETCH_ASK');
+  },
   components: {
     ListItem
   }

@@ -29,18 +29,11 @@
 import ListItem from "../components/ListItem";
 
 export default {
-  components: {ListItem},
-  // data() {
-  //   return {
-  //     jobs: []
-  //   }
-  // },
-  // created() {
-  //   // fetchJobsList()
-  //   // .then(response => this.jobs = response.data)
-  //   // .catch(error => console.log(error));
-  //
-  //   this.$store.dispatch('FETCH_JOBS');
-  // }
+  components: {
+    ListItem
+  },
+  created() {
+    this.$store.dispatch('FETCH_JOBS');
+  }
 }
 </script>
