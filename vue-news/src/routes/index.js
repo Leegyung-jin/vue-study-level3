@@ -7,6 +7,8 @@ import ItemView from "../views/ItemView";
 import NewsView from "../views/NewsView";
 import JobsView from "../views/JobsView";
 import AskView from "../views/AskView";
+import bus from "../utils/bus";
+import { store } from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -23,7 +25,21 @@ export const router = new VueRouter({
             name: 'news',
             // component: url 주소로 이동했을 때 표시될 컴포넌트
             // component: createListView('NewsView'),
-            component: NewsView
+            component: NewsView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                // #1
+                store.dispatch('FETCH_LIST', to.name)
+                    .then(() => {
+                        // #5
+                        console.log('fetched');
+                        bus.$emit('end:spinner');
+                        next();
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    });
+            },
         },
         {
             path: '/ask',
