@@ -45,13 +45,31 @@ export const router = new VueRouter({
             path: '/ask',
             name: 'ask',
             // component: createListView('AskView'),
-            component: AskView
+            component: AskView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                    .then(() => {
+                        next();
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    });
+            },
         },
         {
             path: '/jobs',
             name: 'jobs',
             // component: createListView('JobsView'),
-            component: JobsView
+            component: JobsView,
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                .then(() => next())
+                .catch((error) => {
+                    console.log(error)
+                });
+            },
         },
         {
             path: '/user/:id',
