@@ -1,5 +1,5 @@
 <template>
-  <canvas id="lineChart"></canvas>
+  <canvas ref="lineChart" id="lineChart"></canvas>
 </template>
 
 <script>
@@ -7,7 +7,8 @@ import Chart from "chart.js";
 
 export default {
   mounted() {
-    var ctx = document.getElementById('lineChart').getContext('2d');
+    // var ctx = document.getElementById('lineChart').getContext('2d');
+    var ctx = this.$refs.lineChart.getContext('2d');
     var chart = new Chart(ctx, {  // eslint-disable-line no-unused-vars
       type: 'line',
       data: {
