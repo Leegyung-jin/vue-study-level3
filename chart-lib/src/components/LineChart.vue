@@ -3,9 +3,13 @@
 </template>
 
 <script>
+import Chart from "chart.js";
+
 export default {
   mounted() {
-    var chart = new this.$_Chart(this.$refs.lineChart, {  // eslint-disable-line no-unused-vars
+    // var ctx = document.getElementById('lineChart').getContext('2d');
+    var ctx = this.$refs.lineChart.getContext('2d');
+    var chart = new Chart(ctx, {  // eslint-disable-line no-unused-vars
       type: 'line',
       data: {
         labels: ['January', 'February', 'March', 'Aprill', 'May', 'June', 'July'],
